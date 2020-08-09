@@ -1,1 +1,25 @@
-<p>agregar-editar-comentario works!</p>
+<h3>Agregar Comentario</h3>
+<form>
+    <div class="form-group row">
+        <label class="control-label col-md-12">Titulo</label>
+        <div class="col-md-12">
+            <input type="text" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-md-12">Creador</label>
+        <div class="col-md-12">
+            <input type="text" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-md-12">Texto</label>
+        <div class="col-md-12">
+            <textarea rows="8" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success float-right">Aceptar</button>
+        <button [routerLink]="['/']" class="btn btn-warning float-left">Cancelar</button>
+    </div>
+</form>
