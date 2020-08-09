@@ -14,6 +14,8 @@ export class AgregarEditarComentarioComponent implements OnInit {
   comentarios: FormGroup;
   idComentario = 0;
   action = 'Agregar';
+  loading = false;
+  comment: comentario;
 
   constructor(private fb: FormBuilder, 
               private route: ActivatedRoute, 
@@ -44,16 +46,30 @@ export class AgregarEditarComentarioComponent implements OnInit {
       this.comentarioService.guardarComentario(comentarioData).subscribe(data =>{
         this.router.navigate(['/']);
       });
+    }else{
+      const comentarioData: comentario = {
+        id: this.comment.id,
+        fechaCreacion: this.comment.fechaCreacion,
+        creador: this.comentarios.get('creador').value,
+        titulo: this.comentarios.get('titulo').value,
+        texto: this.comentarios.get('texto').value,
+      };
+      this.comentarioService.actualizarComentario(this.idComentario, comentarioData).subscribe(data =>{
+        this.router.navigate(['/']);
+      })      
     }
   }
 
   editar(){
     if (this.idComentario > 0){
       this.action = 'Editar';
-      this.comentarios.patchValue({
-        titulo: 'Gladiador',
-        creador: 'Fabrizio',
-        texto: 'Gano un Oscar en e 2000'
+      this.comentarioService.cargarComentario(this.idComentario).subscribe(data => {
+        this.comment = data;
+        this.comentarios.patchValue({
+          titulo: data.titulo,
+          creador: data.creador,
+          texto: data.texto
+        })
       })
     }
   }
