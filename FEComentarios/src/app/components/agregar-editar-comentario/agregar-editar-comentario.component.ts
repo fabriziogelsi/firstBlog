@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms'
 
 @Component({
   selector: 'app-agregar-editar-comentario',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgregarEditarComentarioComponent implements OnInit {
 
-  constructor() { }
+  comentarios: FormGroup;
+
+  constructor(private fb: FormBuilder) { 
+    this.comentarios = this.fb.group({
+      titulo: ['', Validators.required],
+      creador: ['', Validators.required],
+      texto: ['', Validators.required],
+    })
+  }
 
   ngOnInit(): void {
+  }
+
+  guardarComentario(){
+    console.log(this.comentarios);
   }
 
 }

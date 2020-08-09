@@ -1,21 +1,21 @@
 <h3>Agregar Comentario</h3>
-<form>
+<form [formGroup] = "comentarios" (ngSubmit)="guardarComentario()">
     <div class="form-group row">
         <label class="control-label col-md-12">Titulo</label>
         <div class="col-md-12">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" formControlName="titulo">
         </div>
     </div>
     <div class="form-group row">
         <label class="control-label col-md-12">Creador</label>
         <div class="col-md-12">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" formControlName="creador">
         </div>
     </div>
     <div class="form-group row">
         <label class="control-label col-md-12">Texto</label>
         <div class="col-md-12">
-            <textarea rows="8" class="form-control"></textarea>
+            <textarea rows="8" class="form-control" formControlName="texto"></textarea>
         </div>
     </div>
     <div class="form-group">
