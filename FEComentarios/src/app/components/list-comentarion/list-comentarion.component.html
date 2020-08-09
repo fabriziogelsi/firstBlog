@@ -20,7 +20,11 @@
             <td><a [routerLink] = "['/ver/', '1']">Pelicula Gladiador</a></td>
             <td>Fabrizio</td>
             <td>08/08/2020</td>
-            <td><button class="btn btn-primary btn-sm">Editar</button></td>
+            <td>
+                <button class="btn btn-primary btn-sm" 
+                        [routerLink] = "['/editar/', '1']">Editar
+                </button>
+            </td>
             <td><button class="btn btn-danger btn-sm float-right">Eliminar</button></td>
         </tr>
     </tbody>
