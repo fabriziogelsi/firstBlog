@@ -29,7 +29,15 @@ namespace BEComentarios
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("Connection")));
+
             services.AddScoped<Service, Service>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin()
+                                                                  .AllowAnyHeader()
+                                                                  .AllowAnyMethod());
+            });
             services.AddControllers();
         }
 
@@ -40,6 +48,8 @@ namespace BEComentarios
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
 
