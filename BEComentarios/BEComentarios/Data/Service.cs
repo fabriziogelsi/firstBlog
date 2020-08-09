@@ -1,4 +1,5 @@
 ﻿using BEComentarios.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,8 +65,9 @@ namespace BEComentarios.Data
                 var existingComent = this.context.Comentario.Where(c => c.Id == id).FirstOrDefault();
                 if (existingComent != null)
                 {
+                    this.context.Entry(existingComent).State = EntityState.Detached;
                     existingComent = comentario;
-                    this.context.Update(existingComent);
+                    this.context.Entry(existingComent).State = EntityState.Modified;
                     this.context.SaveChanges();
                     return true;
                 }

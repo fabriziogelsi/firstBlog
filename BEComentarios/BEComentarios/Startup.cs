@@ -29,6 +29,7 @@ namespace BEComentarios
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("Connection")));
+            services.AddScoped<Service, Service>();
             services.AddControllers();
         }
 

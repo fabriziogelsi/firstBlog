@@ -23,7 +23,7 @@ namespace BEComentarios.Controllers
 
         // GET: api/<ComentarioController>
         [HttpGet]
-        public ActionResult Get()
+        public ActionResult<List<ComentarioDataModel>> Get()
         {
             var viewComments = service.getComments();
             return Ok(viewComments);
