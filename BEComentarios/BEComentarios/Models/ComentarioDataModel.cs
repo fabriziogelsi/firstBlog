@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BEComentarios.Models
 {
-    public class Comentario
+    public class ComentarioDataModel
     {
         [Required]
         public int Id { get; set; }
