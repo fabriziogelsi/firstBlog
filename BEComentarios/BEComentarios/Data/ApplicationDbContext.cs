@@ -11,9 +11,22 @@ namespace BEComentarios.Data
     {
         public DbSet<ComentarioDataModel> Comentario { get; set; }
 
+        public ApplicationDbContext()
+        {
+
+        }
+
+        public ApplicationDbContext(DbContextOptions options):base(options)
+        {
+
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("Server=localhost;Database=ABMComentarios;Uid=root;Pwd=Reja2020.-");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseMySql("Server=localhost;Database=ABMComentarios;Uid=root;Pwd=Reja2020.-");
+            }           
         }
     }
 }
