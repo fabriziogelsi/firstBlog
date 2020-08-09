@@ -1,6 +1,8 @@
+import { ComentarioService } from './../../services/comentario.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { comentario } from '../../models/comentario';
 
 @Component({
   selector: 'app-agregar-editar-comentario',
@@ -13,7 +15,10 @@ export class AgregarEditarComentarioComponent implements OnInit {
   idComentario = 0;
   action = 'Agregar';
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) { 
+  constructor(private fb: FormBuilder, 
+              private route: ActivatedRoute, 
+              private comentarioService: ComentarioService,
+              private router: Router) { 
     this.comentarios = this.fb.group({
       titulo: ['', Validators.required],
       creador: ['', Validators.required],
@@ -29,7 +34,17 @@ export class AgregarEditarComentarioComponent implements OnInit {
   }
 
   guardarComentario(){
-    console.log(this.comentarios);
+    if (this.action === "Agregar"){
+      const comentarioData: comentario = {
+        fechaCreacion: new Date(),
+        creador: this.comentarios.get('creador').value,
+        titulo: this.comentarios.get('titulo').value,
+        texto: this.comentarios.get('texto').value,
+      };
+      this.comentarioService.guardarComentario(comentarioData).subscribe(data =>{
+        this.router.navigate(['/']);
+      });
+    }
   }
 
   editar(){
